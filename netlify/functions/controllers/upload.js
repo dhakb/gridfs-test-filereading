@@ -1,4 +1,4 @@
-import { GridFSBucket, ObjectId } from "mongodb";
+import { ObjectId } from "mongodb";
 
 
 import connectDB from "../db/connect.db.js";
@@ -26,6 +26,7 @@ export const getImage = async (req, res) => {
     connection = await connectToBucket("uploads_fs", "images")
    
     const _id = ObjectId(imgId)
+    console.log(_id)
 
     connection.bucket.openDownloadStream(_id).pipe(res)
     
@@ -44,19 +45,10 @@ export const getImages = async (req, res) => {
 
   try {
     connection = await connectToBucket("uploads_fs", "images")
-    // const mongoClient = await connectDB(process.env.MONGO_URI)
-    // const db = mongoClient.db("uploads_fs")
-    // const collection = db.collection("images.files")
 
     let images = []
     const cursor = connection.bucket.find()
-    // cursor.toArray((err, files) => {
-    //   files.forEach(doc => {
-    //     console.log(doc)
-    //       images.push(doc)
-    //     })
-    // })
-    
+
     await cursor.forEach((doc) => {
       images.push(doc)
     })

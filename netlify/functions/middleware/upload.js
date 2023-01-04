@@ -18,8 +18,10 @@ const storage = new GridFsStorage({
             crypto.randomBytes(12, (err, buff) => {
                 if(err) return reject(err)
               
-                const fileName = buff.toString("hex") + path.extname(file.originalname)
-                const fileInfo = {fileName, bucketName: "images"}
+                const filename = buff.toString("hex") + path.extname(file.originalname)
+        
+                console.log("avoieeeee")
+                const fileInfo = {filename, bucketName: "images"}
 
                 resolve(fileInfo)
             })
