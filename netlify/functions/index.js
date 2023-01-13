@@ -1,18 +1,26 @@
-import expess from "express";
-import cors from "cors"
-import { config } from "dotenv";
-import serveless from "serverless-http"
+const express = require("express")
+const cors = require("cors")
+const serveless = require("serverless-http")
+require("dotenv").config()
 
-import {uploadImage, getImage, getImages} from "./controllers/upload.js"
+const {uploadImage, getImage, getImages} = require("./controllers/upload")
+
+// import express from "express";
+// import cors from "cors"
+// import { config } from "dotenv";
+// import serveless from "serverless-http"
 
 
-const app = expess();
+// import {uploadImage, getImage, getImages} from "./controllers/upload.js"
+
+
+const app = express();
 config();
 
 
 app.use(cors({origin: "*"}))
-app.use(expess.json())
-app.use(expess.urlencoded({extended: true}))
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
 
 app.post("/.netlify/functions/index/upload", uploadImage)
 app.get("/.netlify/functions/index/upload/images", getImages)
