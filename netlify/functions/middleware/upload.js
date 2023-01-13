@@ -1,23 +1,23 @@
-const util = require("util")
-const mmulter = require("multer")
-const crypto = require("crypto")
-const path = require("path")
-const {GridFsStorage} = require("multer-gridfs-storage")
-require("dotenv").config()
+// const util = require("util")
+// const mmulter = require("multer")
+// const crypto = require("crypto")
+// const path = require("path")
+// const {GridFsStorage} = require("multer-gridfs-storage")
+// require("dotenv").config()
 
-const connectDB = require("../db/connect.db.js")
+// const connectDB = require("../db/connect.db.js")
 
 
-// import util from "node:util"
-// import multer from "multer"
-// import crypto from "crypto"
-// import path from "path"
-// import {config} from "dotenv"
-// import { GridFsStorage } from "multer-gridfs-storage"
+import util from "node:util"
+import multer from "multer"
+import crypto from "crypto"
+import path from "path"
+import {config} from "dotenv"
+import { GridFsStorage } from "multer-gridfs-storage"
 
-// import connectDB from "../db/connect.db.js"
+import connectDB from "../db/connect.db.js"
 
-// config()
+config()
 
 const mongoClient = await connectDB(process.env.MONGO_URI)
 
@@ -47,7 +47,7 @@ const upload = multer({storage}).single("file")
 const uploadMiddleware = util.promisify(upload)
 
 
-module.exports = uploadMiddleware
+// module.exports = uploadMiddleware
 
 // export default upload
-// export default uploadMiddleware
+export default uploadMiddleware

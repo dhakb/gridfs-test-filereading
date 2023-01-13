@@ -1,18 +1,18 @@
-const {ObjectId} = require("mongodb")
+// const {ObjectId} = require("mongodb")
 
-const connectDB = require("../db/connect.db.js")
-const connectToBucket = require("../db/connect.gfs.js")
-const uploadMiddleware = require("../middleware/upload.js")
-
-// import { ObjectId } from "mongodb";
-
-// import connectDB from "../db/connect.db.js";
-// import connectToBucket from "../db/connect.gfs.js";
-// import uploadMiddleware from "../middleware/upload.js";
+// const connectDB = require("../db/connect.db.js")
+// const connectToBucket = require("../db/connect.gfs.js")
+// const uploadMiddleware = require("../middleware/upload.js")
 
 
+import { ObjectId } from "mongodb";
+import connectDB from "../db/connect.db.js";
+import connectToBucket from "../db/connect.gfs.js";
+import uploadMiddleware from "../middleware/upload.js";
 
-exports.uploadImage = async (req, res) => {
+
+
+export const uploadImage = async (req, res) => {
   try {
     await uploadMiddleware(req, res); 
 
@@ -23,7 +23,7 @@ exports.uploadImage = async (req, res) => {
 };
 
 
-exports.getImage = async (req, res) => {
+export const getImage = async (req, res) => {
   const { imgId }= req.params
   let connection;
     
@@ -45,7 +45,7 @@ exports.getImage = async (req, res) => {
 
 
 
-exports.getImages = async (req, res) => {
+export const getImages = async (req, res) => {
   let connection;
 
   try {
