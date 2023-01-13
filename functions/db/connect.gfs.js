@@ -1,12 +1,18 @@
 // const {GridFSBucket} = require("mongodb")
 // const connectDB = require("./connect.db.js")
 
+import { MongoClient, GridFSBucket } from "mongodb";
 
-import { GridFSBucket } from "mongodb";
-import connectDB from "./connect.db.js";
 
 async function connectToBucket(database, bucketName) {
-  const mongoClient = await connectDB(process.env.MONGO_URI);
+  const mongoClient = new MongoClient(`${process.env.MONGO_URI}`);
+
+  try {
+    await mongoClient.connect();
+  } catch (e) {
+    console.log(e)
+  }
+  
   const db = mongoClient.db(database);
   const bucket = new GridFSBucket(db, { bucketName: bucketName });
 
@@ -14,6 +20,5 @@ async function connectToBucket(database, bucketName) {
 }
 
 export default connectToBucket;
-
 
 // module.exports = connectToBucket

@@ -13,33 +13,29 @@ import multer from "multer"
 import crypto from "crypto"
 import path from "path"
 import {config} from "dotenv"
+import { MongoClient } from "mongodb"
 import { GridFsStorage } from "multer-gridfs-storage"
-
-import connectDB from "../db/connect.db.js"
-
 config()
 
-const mongoClient = await connectDB(process.env.MONGO_URI)  
+
+const mongo_db = new MongoClient(`${process.env.MONGO_URI}`).connect().then(client => client.db("uploads_fs"))
+console.log(`${process.env.MONGO_URI}`)
+
 
 const storage = new GridFsStorage({
-    db: mongoClient.db("uploads_fs"),
+    db: mongo_db,
     file: (req, file) => {
         return new Promise((resolve, reject) => {
             crypto.randomBytes(12, (err, buff) => {
                 if(err) return reject(err)
               
                 const filename = buff.toString("hex") + path.extname(file.originalname)
-        
-                console.log("avoieeeee")
                 const fileInfo = {filename, bucketName: "images"}
 
                 resolve(fileInfo)
             })
         })
     },
-    // fileFilter: function (req, file, cb) {
-        
-    // }
 })
 
 

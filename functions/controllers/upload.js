@@ -6,7 +6,6 @@
 
 
 import { ObjectId } from "mongodb";
-import connectDB from "../db/connect.db.js";
 import connectToBucket from "../db/connect.gfs.js";
 import uploadMiddleware from "../middleware/upload.js";
 
@@ -40,6 +39,8 @@ export const getImage = async (req, res) => {
     res.status(500).json({
       message: e.message,
     });
+  } finally {
+    await connection.mongoClient.close()
   }
 };
 
@@ -61,5 +62,7 @@ export const getImages = async (req, res) => {
     res.send(images)
   } catch (e) {
     console.log(e)
+  } finally {
+    await connection.mongoClient.close()
   }
 }
