@@ -4,21 +4,12 @@
 import { MongoClient, GridFSBucket } from "mongodb";
 
 
-async function connectToBucket(database, bucketName) {
-  const mongoClient = new MongoClient(`${process.env.MONGO_URI}`);
-
-  try {
-    await mongoClient.connect();
-  } catch (e) {
-    console.log(e)
-  }
-  
+function connectToBucket(database, bucketName) {
+  const mongoClient = new MongoClient(`mongodb+srv://salyut:r6Ajhbk6EBRn1dhw@cluster0.n0ya2zz.mongodb.net/?retryWrites=true&w=majority`);
   const db = mongoClient.db(database);
-  const bucket = new GridFSBucket(db, { bucketName: bucketName });
+  let bucket = new GridFSBucket(db, { bucketName: bucketName });
 
   return { bucket, mongoClient };
 }
 
 export default connectToBucket;
-
-// module.exports = connectToBucket

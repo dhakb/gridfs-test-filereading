@@ -18,8 +18,7 @@ import { GridFsStorage } from "multer-gridfs-storage"
 config()
 
 
-const mongo_db = new MongoClient(`${process.env.MONGO_URI}`).connect().then(client => client.db("uploads_fs"))
-console.log(`${process.env.MONGO_URI}`)
+const mongo_db = new MongoClient(`mongodb+srv://salyut:r6Ajhbk6EBRn1dhw@cluster0.n0ya2zz.mongodb.net/?retryWrites=true&w=majority`).connect().then(client => client.db("uploads_fs"))
 
 
 const storage = new GridFsStorage({
@@ -45,5 +44,4 @@ const uploadMiddleware = util.promisify(upload)
 
 // module.exports = uploadMiddleware
 
-// export default upload
 export default uploadMiddleware
