@@ -35,10 +35,10 @@ app.get("/.netlify/functions/index/upload/:imgId", getImage)
 
 
 
-export const handler = serveless(app)
+// export const handler = serveless(app)
 
 // module.exports.handler = serveless(app)
 
-// app.listen(8000, () => {
-//   console.log("running on port 8000...");
-// });
+app.listen(8080, () => {
+  console.log("running on port 8080...");
+});
