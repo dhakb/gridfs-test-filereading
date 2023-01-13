@@ -22,10 +22,17 @@ app.use(cors({origin: "*"}))
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
+
+app.get("/.netlify/functions/index/test", (req, res) => {
+    res.send({
+        message: "test satisfied!! hooray"
+    })
+})
+
 app.post("/.netlify/functions/index/upload", uploadImage)
 app.get("/.netlify/functions/index/upload/images", getImages)
 app.get("/.netlify/functions/index/upload/:imgId", getImage)
-1
+
 
 
 export const handler = serveless(app)

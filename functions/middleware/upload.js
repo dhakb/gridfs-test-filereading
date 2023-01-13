@@ -19,7 +19,7 @@ import connectDB from "../db/connect.db.js"
 
 config()
 
-const mongoClient = await connectDB(process.env.MONGO_URI)
+const mongoClient = await connectDB(process.env.MONGO_URI)  
 
 const storage = new GridFsStorage({
     db: mongoClient.db("uploads_fs"),

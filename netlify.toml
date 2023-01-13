@@ -2,5 +2,9 @@
     publish = "public"
     functions = "functions"
 
-[functions]
-  node_bundler = "esbuild"
+# [build.environment]
+  # NODE_VERSION = "14.16.0"
+
+# [functions]
+  # directory = ".netlify/functions"
+  # node_bundler = "esbuild"
